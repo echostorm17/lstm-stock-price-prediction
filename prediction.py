@@ -1,8 +1,10 @@
 import numpy as np
 from pandas import read_csv
 from sklearn.preprocessing import MinMaxScaler
-
-
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.layers import LSTM
+from keras.layers.core import Dense, Activation, Dropout
 
 
 
@@ -48,3 +50,11 @@ testX, testY = create_dataset(test, look_back)
 # reshape input to be [samples, time steps, features]
 trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
 testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
+
+# create and fit the LSTM network, optimizer=adam, 25 neurons, dropout 0.1
+model = Sequential()
+model.add(LSTM(25, input_shape=(1, look_back)))
+model.add(Dropout(0.1))
+model.add(Dense(1))
+model.compile(loss='mse', optimizer='adam')
+model.fit(trainX, trainY, epochs=1000, batch_size=240, verbose=1)
