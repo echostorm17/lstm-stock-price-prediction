@@ -12,6 +12,15 @@ from sklearn.preprocessing import MinMaxScaler
 # test data = 1.1.2007 - 1.1.2017
 input_file="data/inputdata.csv"
 
+# convert an array of values into a dataset matrix
+def create_dataset(dataset, look_back=1):
+	dataX, dataY = [], []
+	for i in range(len(dataset)-look_back-1):
+		a = dataset[i:(i+look_back), 0]
+		dataX.append(a)
+		dataY.append(dataset[i + look_back, 0])
+	return np.array(dataX), np.array(dataY)
+
 # fix random seed for reproducibility
 np.random.seed(5)
 
@@ -30,3 +39,8 @@ dataset = scaler.fit_transform(dataset)
 train_size = int(len(dataset) * 0.5)
 test_size = len(dataset) - train_size
 train, test = dataset[0:train_size,:], dataset[train_size:len(dataset),:]
+
+# reshape into X=t and Y=t+1, timestep 240
+look_back = 240
+trainX, trainY = create_dataset(train, look_back)
+testX, testY = create_dataset(test, look_back)
