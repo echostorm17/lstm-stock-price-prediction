@@ -21,8 +21,6 @@
 - LSTM was proposed in 1997 by Sepp Hochreiter and Jürgen Schmidhuber and improved in 2000 by Felix Gers' team.
 [Paper](https://www.bioinf.jku.at/publications/older/2604.pdf) 
 
-Code: https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Demo/tree/master/BasicLSTM
-
 ### LSTM Cell <a name="LSTMCell"></a>
 
 <img width="886" alt="lstm_cell" src="https://user-images.githubusercontent.com/10358317/44312843-34a8bc80-a407-11e8-96c3-cc2bc07f1500.png">
@@ -39,17 +37,15 @@ Code: https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Demo/tree/master/Bas
 ## SAMPLE LSTM CODE: Prediction of Stock Prices Using LSTM network <a name="SampleStock"></a>
 Stock and ETFs prices are predicted using LSTM network (Keras-Tensorflow).
 
-Code: https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Demo/tree/master/StockPricesPredictionProject
-
-- Stock prices are downloaded from [finance.yahoo.com](https://finance.yahoo.com/). [Disneyland (DIS) Stock Price CSV file](https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Stock_Prices_Prediction/blob/master/Stock_Prices_Prediction_Example/DIS.csv).
-- Closed value (column[5]) is used in the network, [LSTM Code](https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Stock_Prices_Prediction/blob/master/Stock_Prices_Prediction_Example/pricePredictionLSTM.py)
+- Stock prices are downloaded from [finance.yahoo.com](https://finance.yahoo.com/). [Disneyland Stock Price CSV file](https://github.com/skydev111/lstm-stock-price/blob/main/data/inputdata.csv).
+- Closed value (column[5]) is used in the network, [LSTM Code](https://github.com/skydev111/lstm-stock-price/blob/main/prediction.py)
 - Values are normalized in range (0,1).
 - Datasets are splitted into train and test sets, 50% test data, 50% training data.
 - Keras-Tensorflow is used for implementation.
 - LSTM network consists of 25 hidden neurons, and 1 output layer (1 dense layer).
 - LSTM network features input: 1 layer, output: 1 layer , hidden: 25 neurons, optimizer:adam, dropout:0.1, timestep:240, batchsize:240, epochs:1000 (features can be further optimized).
 - Root mean squared errors are calculated.
-- Output files:  [lstm_results](https://github.com/omerbsezer/LSTM_RNN_Tutorials_with_Stock_Prices_Prediction/blob/master/Stock_Prices_Prediction_Example/lstm_result.csv) (consists of prediction and actual values), plot file (actual and prediction values).
+- Output files:  [lstm_results](https://github.com/skydev111/lstm-stock-price/blob/main/data/lstm_resultdata.csv) (consists of prediction and actual values), plot file (actual and prediction values).
 
 ![dis_prediction_and_actualprice](https://user-images.githubusercontent.com/10358317/37895737-e01ed832-30ea-11e8-9249-9b69ae2eccff.png)
 
