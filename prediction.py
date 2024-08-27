@@ -5,8 +5,8 @@ from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
 from keras.layers.core import Dense, Activation, Dropout
-
-
+import math
+from sklearn.metrics import mean_squared_error
 
 
 # file is downloaded from finance.yahoo.com, 1.1.1997-1.1.2017
@@ -58,3 +58,14 @@ model.add(Dropout(0.1))
 model.add(Dense(1))
 model.compile(loss='mse', optimizer='adam')
 model.fit(trainX, trainY, epochs=1000, batch_size=240, verbose=1)
+
+# make predictions
+trainPredict = model.predict(trainX)
+testPredict = model.predict(testX)
+
+# invert predictions
+trainPredict = scaler.inverse_transform(trainPredict)
+trainY = scaler.inverse_transform([trainY])
+testPredict = scaler.inverse_transform(testPredict)
+testY = scaler.inverse_transform([testY])
+
