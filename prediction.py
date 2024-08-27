@@ -7,7 +7,8 @@ from keras.layers import LSTM
 from keras.layers.core import Dense, Activation, Dropout
 import math
 from sklearn.metrics import mean_squared_error
-
+import matplotlib.pyplot as plt
+import pandas as pd
 
 # file is downloaded from finance.yahoo.com, 1.1.1997-1.1.2017
 # training data = 1.1.1997 - 1.1.2007
@@ -84,3 +85,20 @@ trainPredictPlot[look_back:len(trainPredict)+look_back, :] = trainPredict
 testPredictPlot = np.empty_like(dataset)
 testPredictPlot[:, :] = np.nan
 testPredictPlot[len(trainPredict)+(look_back*2)+1:len(dataset)-1, :] = testPredict
+
+# plot baseline and predictions
+plt.plot(scaler.inverse_transform(dataset))
+plt.plot(trainPredictPlot)
+print('testPrices:')
+testPrices=scaler.inverse_transform(dataset[test_size+look_back:])
+
+print('testPredictions:')
+print(testPredict)
+
+# export prediction and actual prices
+df = pd.DataFrame(data={"prediction": np.around(list(testPredict.reshape(-1)), decimals=2), "test_price": np.around(list(testPrices.reshape(-1)), decimals=2)})
+df.to_csv("data/lstm_resultdata.csv", sep=';', index=None)
+
+# plot the actual price, prediction in test data=red line, actual price=blue line
+plt.plot(testPredictPlot)
+plt.show()
